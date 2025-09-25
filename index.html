@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pendaftaran TKA - SMK Negeri 1 Purbalingga</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --success-color: #06ffa5;
+            --warning-color: #ff9e00;
+            --danger-color: #f72585;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--dark-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" /><path d="M0,0 L100,100 M100,0 L0,100" stroke="rgba(255,255,255,0.1)" stroke-width="2" /></svg>');
+            opacity: 0.2;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .school-info {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            background-color: #f8f9fa;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            font-size:1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            outline: none;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .subject-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background-color: white;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .subject-item:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .subject-item input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .subject-item.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .subject-item.wajib {
+            background-color: rgba(76, 201, 240, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .subject-item.wajib.selected {
+            background-color: rgba(76, 201, 240, 0.2);
+        }
+
+        .subject-item.pre-selected {
+            background-color: rgba(255, 158, 0, 0.1);
+            border-color: var(--warning-color);
+        }
+
+        .subject-item.pre-selected.selected {
+            background-color: rgba(255, 158, 0, 0.2);
+        }
+
+        .subject-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .subject-badge.pre-selected {
+            background-color: var(--warning-color);
+        }
+
+        .signature-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .signature-box {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .signature-pad {
+            width: 100%;
+            height: 150px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .signature-pad i {
+            font-size: 2rem;
+            color: #aaa;
+        }
+
+        .signature-text {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 14px 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            border-top: 1px solid #eee;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background-color: var(--success-color);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(150%);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+            font-weight: 500;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background-color: var(--danger-color);
+        }
+
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .info-box {
+            background-color: rgba(76, 201, 240, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: var(--dark-color);
+        }
+
+        .subject-category {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .subject-category i {
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .form-col {
+                margin-bottom: 15px;
+            }
+            
+            .subjects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-graduation-cap"></i> Formulir Pendaftaran TKA</h1>
+            <p>Tes Kemampuan Akademik - Berdasarkan Peraturan Menteri Pendidikan No 9 Tahun 2025</p>
+            <div class="school-info">
+                <i class="fas fa-school"></i> SMK Negeri 1 Purbalingga
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div class="info-box">
+                <p><i class="fas fa-info-circle"></i> <strong>Informasi Penting:</strong> Silakan isi semua kolom dengan benar. Mata pelajaran wajib sudah terpilih secara otomatis. KIK (Kompetensi Kejuruan) sudah terpilih untuk Anda.</p>
+            </div>
+
+            <form id="tkaForm">
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-user"></i> Data Pribadi</h2>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="nama">Nama Lengkap</label>
+                                <input type="text" id="nama" name="nama" required="">
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="tanggalLahir">Tanggal Lahir</label>
+                                <input type="date" id="tanggalLahir" name="tanggalLahir" required="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="nisn">NISN</label>
+                                <input type="text" id="nisn" name="nisn" pattern="[0-9]{10}" title="NISN harus 10 digit angka" required="">
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="jurusan">Jurusan</label>
+                                <select id="jurusan" name="jurusan" required="">
+                                    <option value="">-- Pilih Jurusan --</option>
+                                    <option value="Teknik Komputer dan Jaringan">Teknik Komputer dan Jaringan</option>
+                                    <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
+                                    <option value="Multimedia">Multimedia</option>
+                                    <option value="Teknik Kendaraan Ringan">Teknik Kendaraan Ringan</option>
+                                    <option value="Teknik Mesin">Teknik Mesin</option>
+                                    <option value="Teknik Elektro">Teknik Elektro</option>
+                                    <option value="Akuntansi">Akuntansi</option>
+                                    <option value="Pemasaran">Pemasaran</option>
+                                    <option value="Perbankan Syariah">Perbankan Syariah</option>
+                                    <option value="Bisnis Daring dan Pemasaran">Bisnis Daring dan Pemasaran</option>
+                                    <option value="Tata Boga">Tata Boga</option>
+                                    <option value="Tata Busana">Tata Busana</option>
+                                    <option value="Perhotelan">Perhotelan</option>
+                                    <option value="Usaha Perjalanan Wisata">Usaha Perjalanan Wisata</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sekolah">Asal Sekolah</label>
+                        <input type="text" id="sekolah" name="sekolah" value="SMK Negeri 1 Purbalingga" readonly="">
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-check-circle"></i> Keikutsertaan TKA</h2>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="mengikuti" name="keikutsertaan" value="Mengikuti" checked="">
+                        <label for="mengikuti">Saya akan mengikuti Tes Kemampuan Akademik (TKA)</label>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-book"></i> Pilihan Mata Pelajaran</h2>
+                    
+                    <div class="subject-category">
+                        <i class="fas fa-star"></i> Mata Pelajaran Wajib (Sudah Otomatis Terpilih)
+                    </div>
+                    <div class="subjects-grid">
+                        <div class="subject-item wajib">
+                            <input type="checkbox" id="matematika" name="mataPelajaran" value="Matematika" checked="" disabled="">
+                            <label for="matematika">Matematika</label>
+                            <span class="subject-badge">Wajib</span>
+                        </div>
+                        <div class="subject-item wajib">
+                            <input type="checkbox" id="b_indonesia" name="mataPelajaran" value="Bahasa Indonesia" checked="" disabled="">
+                            <label for="b_indonesia">Bahasa Indonesia</label>
+                            <span class="subject-badge">Wajib</span>
+                        </div>
+                        <div class="subject-item wajib">
+                            <input type="checkbox" id="b_inggris" name="mataPelajaran" value="Bahasa Inggris" checked="" disabled="">
+                            <label for="b_inggris">Bahasa Inggris</label>
+                            <span class="subject-badge">Wajib</span>
+                        </div>
+                    </div>
+                    
+                    <div class="subject-category">
+                        <i class="fas fa-plus-circle"></i> Mata Pelajaran Tambahan
+                    </div>
+                    <div class="subjects-grid">
+                        <div class="subject-item">
+                            <input type="checkbox" id="matematika_lanjut" name="mataPelajaran" value="Matematika Lanjut">
+                            <label for="matematika_lanjut">Matematika Lanjut</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="b_inggris_lanjut" name="mataPelajaran" value="Bahasa Inggris Lanjut">
+                            <label for="b_inggris_lanjut">Bahasa Inggris Lanjut</label>
+                        </div>
+                        <div class="subject-item pre-selected">
+                            <input type="checkbox" id="kik" name="mataPelajaran" value="KIK (Kompetensi Kejuruan)" checked="">
+                            <label for="kik">KIK (Kreatif Inovatif dan Kewirausahaan)</label>
+                            <span class="subject-badge pre-selected">★</span>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="fisika" name="mataPelajaran" value="Fisika">
+                            <label for="fisika">Fisika</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="kimia" name="mataPelajaran" value="Kimia">
+                            <label for="kimia">Kimia</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="biologi" name="mataPelajaran" value="Biologi">
+                            <label for="biologi">Biologi</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="ekonomi" name="mataPelajaran" value="Ekonomi">
+                            <label for="ekonomi">Ekonomi</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="sosiologi" name="mataPelajaran" value="Sosiologi">
+                            <label for="sosiologi">Sosiologi</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="geografi" name="mataPelajaran" value="Geografi">
+                            <label for="geografi">Geografi</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="sejarah" name="mataPelajaran" value="Sejarah">
+                            <label for="sejarah">Sejarah</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="b_arab" name="mataPelajaran" value="Bahasa Arab">
+                            <label for="b_arab">Bahasa Arab</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="b_mandarin" name="mataPelajaran" value="Bahasa Mandarin">
+                            <label for="b_mandarin">Bahasa Mandarin</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="sastra_indonesia" name="mataPelajaran" value="Sastra Indonesia">
+                            <label for="sastra_indonesia">Sastra Indonesia</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="sastra_inggris" name="mataPelajaran" value="Sastra Inggris">
+                            <label for="sastra_inggris">Sastra Inggris</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="tik" name="mataPelajaran" value="TIK">
+                            <label for="tik">TIK</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="seni_budaya" name="mataPelajaran" value="Seni Budaya">
+                            <label for="seni_budaya">Seni Budaya</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="penjaskes" name="mataPelajaran" value="Penjaskes">
+                            <label for="penjaskes">Penjaskes</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="pkwu" name="mataPelajaran" value="PKWU">
+                            <label for="pkwu">Bahasa Jepang</label>
+                        </div>
+                        <div class="subject-item">
+                            <input type="checkbox" id="pkn" name="mataPelajaran" value="PKN">
+                            <label for="pkn">PKN</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title"><i class="fas fa-signature"></i> Tanda Tangan &amp; Tanggal</h2>
+                    <div class="signature-container">
+                        <div class="signature-box">
+                            <label for="tandaTangan">Tanda Tangan Digital</label>
+                            <div class="signature-pad">
+                                <input type="text" id="tandaTangan" name="tandaTangan" placeholder="Ketik nama sebagai tanda tangan digital" required="">
+                                <span class="signature-text">Nama Lengkap</span>
+                            </div>
+                        </div>
+                        <div class="signature-box">
+                            <label for="tanggal">Tanggal Pengisian</label>
+                            <input type="date" id="tanggal" name="tanggal" required="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" class="btn">
+                        <i class="fas fa-paper-plane"></i> Kirim Pendaftaran
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Sistem Pendaftaran TKA - SMK Negeri 1 Purbalingga</p>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('tanggal').value = today;
+            
+            // Handle subject selection for all enabled checkboxes
+            const subjectCheckboxes = document.querySelectorAll('input[name="mataPelajaran"]:not(:disabled)');
+            const subjectItems = document.querySelectorAll('.subject-item:not(.wajib)');
+            
+            // Initialize the selected state for KIK (which is checked by default)
+            const kikCheckbox = document.getElementById('kik');
+            if (kikCheckbox.checked) {
+                const kikItem = kikCheckbox.closest('.subject-item');
+                if (kikItem) {
+                    kikItem.classList.add('selected');
+                }
+            }
+            
+            subjectCheckboxes.forEach((checkbox, index) => {
+                checkbox.addEventListener('change', function() {
+                    // Update UI for selected subject
+                    if (this.checked) {
+                        subjectItems[index].classList.add('selected');
+                    } else {
+                        subjectItems[index].classList.remove('selected');
+                    }
+                });
+            });
+            
+            // Handle form submission
+            const form = document.getElementById('tkaForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Collect form data
+                const formData = new FormData(form);
+                const data = {};
+                
+                // Convert FormData to object
+                for (let [key, value] of formData.entries()) {
+                    if (key === 'mataPelajaran') {
+                        if (!data[key]) data[key] = [];
+                        data[key].push(value);
+                    } else {
+                        data[key] = value;
+                    }
+                }
+                
+                // Convert array to string for subjects
+                if (data.mataPelajaran && Array.isArray(data.mataPelajaran)) {
+                    data.mataPelajaran = data.mataPelajaran.join(', ');
+                }
+                
+                // Show loading
+                document.getElementById('loading').style.display = 'flex';
+                
+                // URL Web App yang sudah diperbarui
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbyW2nqUKmkBEbv-xUrpLmE_Ru52Hhex1QlRoQNYKext3dYq1WnZjL0pkV_LF8qsCbhi/exec';
+                
+                // Menggunakan fetch dengan mode no-cors
+                fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(() => {
+                    document.getElementById('loading').style.display = 'none';
+                    showNotification('Pendaftaran berhasil dikirim!');
+                    
+                    // Reset form but keep required selections
+                    form.reset();
+                    document.getElementById('tanggal').value = today;
+                    document.getElementById('mengikuti').checked = true;
+                    document.getElementById('sekolah').value = 'SMK Negeri 1 Purbalingga';
+                    
+                    // Reset wajib subjects (disabled checkboxes)
+                    document.getElementById('matematika').checked = true;
+                    document.getElementById('b_indonesia').checked = true;
+                    document.getElementById('b_inggris').checked = true;
+                    
+                    // Reset KIK as pre-selected
+                    document.getElementById('kik').checked = true;
+                    
+                    // Reset subject selection UI
+                    const allSubjectItems = document.querySelectorAll('.subject-item');
+                    allSubjectItems.forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    
+                    // Set selected state for KIK
+                    const kikItem = document.getElementById('kik').closest('.subject-item');
+                    if (kikItem) {
+                        kikItem.classList.add('selected');
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('loading').style.display = 'none';
+                    showNotification('Terjadi kesalahan: ' + error.message, 'error');
+                    console.error('Error:', error);
+                });
+            });
+            
+            // Notification function
+            function showNotification(message, type = 'success') {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.className = 'notification';
+                
+                if (type === 'error') {
+                    notification.classList.add('error');
+                }
+                
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 5000);
+            }
+        });
+    </script>
+
+</body></html>
