@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulir Pendaftaran TKA - SMK Negeri 1 Purbalingga</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -111,7 +111,7 @@
 
         .section-title i {
             margin-right: 10px;
-            font-size:1.5rem;
+            font-size: 1.5rem;
         }
 
         .form-group {
@@ -152,22 +152,45 @@
             outline: none;
         }
 
-        .checkbox-group {
+        .radio-group {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            gap: 12px;
             margin-bottom: 15px;
         }
 
-        .checkbox-group input[type="checkbox"] {
+        .radio-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-item:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(76, 201, 240, 0.05);
+        }
+
+        .radio-item.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .radio-item input[type="radio"] {
             width: 20px;
             height: 20px;
-            margin-right: 10px;
+            margin-right: 12px;
             cursor: pointer;
         }
 
-        .checkbox-group label {
+        .radio-item label {
             margin-bottom: 0;
             cursor: pointer;
+            flex: 1;
         }
 
         .subjects-grid {
@@ -430,13 +453,13 @@
                         <div class="form-col">
                             <div class="form-group">
                                 <label for="nama">Nama Lengkap</label>
-                                <input type="text" id="nama" name="nama" required="">
+                                <input type="text" id="nama" name="nama" required>
                             </div>
                         </div>
                         <div class="form-col">
                             <div class="form-group">
                                 <label for="tanggalLahir">Tanggal Lahir</label>
-                                <input type="date" id="tanggalLahir" name="tanggalLahir" required="">
+                                <input type="date" id="tanggalLahir" name="tanggalLahir" required>
                             </div>
                         </div>
                     </div>
@@ -444,13 +467,13 @@
                         <div class="form-col">
                             <div class="form-group">
                                 <label for="nisn">NISN</label>
-                                <input type="text" id="nisn" name="nisn" pattern="[0-9]{10}" title="NISN harus 10 digit angka" required="">
+                                <input type="text" id="nisn" name="nisn" pattern="[0-9]{10}" title="NISN harus 10 digit angka" required>
                             </div>
                         </div>
                         <div class="form-col">
                             <div class="form-group">
                                 <label for="jurusan">Jurusan</label>
-                                <select id="jurusan" name="jurusan" required="">
+                                <select id="jurusan" name="jurusan" required>
                                     <option value="">-- Pilih Jurusan --</option>
                                     <option value="Teknik Komputer dan Jaringan">Teknik Komputer dan Jaringan</option>
                                     <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
@@ -472,15 +495,21 @@
                     </div>
                     <div class="form-group">
                         <label for="sekolah">Asal Sekolah</label>
-                        <input type="text" id="sekolah" name="sekolah" value="SMK Negeri 1 Purbalingga" readonly="">
+                        <input type="text" id="sekolah" name="sekolah" value="SMK Negeri 1 Purbalingga" readonly>
                     </div>
                 </div>
 
                 <div class="section">
                     <h2 class="section-title"><i class="fas fa-check-circle"></i> Keikutsertaan TKA</h2>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="mengikuti" name="keikutsertaan" value="Mengikuti" checked="">
-                        <label for="mengikuti">Saya akan mengikuti Tes Kemampuan Akademik (TKA)</label>
+                    <div class="radio-group">
+                        <div class="radio-item selected">
+                            <input type="radio" id="mengikuti" name="keikutsertaan" value="Mengikuti" checked>
+                            <label for="mengikuti">Saya akan mengikuti Tes Kemampuan Akademik (TKA)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="tidak_mengikuti" name="keikutsertaan" value="Tidak Mengikuti">
+                            <label for="tidak_mengikuti">Saya tidak mengikuti Tes Kemampuan Akademik (TKA)</label>
+                        </div>
                     </div>
                 </div>
 
@@ -492,17 +521,17 @@
                     </div>
                     <div class="subjects-grid">
                         <div class="subject-item wajib">
-                            <input type="checkbox" id="matematika" name="mataPelajaran" value="Matematika" checked="" disabled="">
+                            <input type="checkbox" id="matematika" name="mataPelajaran" value="Matematika" checked disabled>
                             <label for="matematika">Matematika</label>
                             <span class="subject-badge">Wajib</span>
                         </div>
                         <div class="subject-item wajib">
-                            <input type="checkbox" id="b_indonesia" name="mataPelajaran" value="Bahasa Indonesia" checked="" disabled="">
+                            <input type="checkbox" id="b_indonesia" name="mataPelajaran" value="Bahasa Indonesia" checked disabled>
                             <label for="b_indonesia">Bahasa Indonesia</label>
                             <span class="subject-badge">Wajib</span>
                         </div>
                         <div class="subject-item wajib">
-                            <input type="checkbox" id="b_inggris" name="mataPelajaran" value="Bahasa Inggris" checked="" disabled="">
+                            <input type="checkbox" id="b_inggris" name="mataPelajaran" value="Bahasa Inggris" checked disabled>
                             <label for="b_inggris">Bahasa Inggris</label>
                             <span class="subject-badge">Wajib</span>
                         </div>
@@ -521,8 +550,8 @@
                             <label for="b_inggris_lanjut">Bahasa Inggris Lanjut</label>
                         </div>
                         <div class="subject-item pre-selected">
-                            <input type="checkbox" id="kik" name="mataPelajaran" value="KIK (Kompetensi Kejuruan)" checked="">
-                            <label for="kik">KIK (Kreatif Inovatif dan Kewirausahaan)</label>
+                            <input type="checkbox" id="kik" name="mataPelajaran" value="KIK (Kompetensi Kejuruan)" checked>
+                            <label for="kik">KIK (Kompetensi Kejuruan)</label>
                             <span class="subject-badge pre-selected">★</span>
                         </div>
                         <div class="subject-item">
@@ -583,7 +612,7 @@
                         </div>
                         <div class="subject-item">
                             <input type="checkbox" id="pkwu" name="mataPelajaran" value="PKWU">
-                            <label for="pkwu">Bahasa Jepang</label>
+                            <label for="pkwu">PKWU</label>
                         </div>
                         <div class="subject-item">
                             <input type="checkbox" id="pkn" name="mataPelajaran" value="PKN">
@@ -593,18 +622,18 @@
                 </div>
 
                 <div class="section">
-                    <h2 class="section-title"><i class="fas fa-signature"></i> Tanda Tangan &amp; Tanggal</h2>
+                    <h2 class="section-title"><i class="fas fa-signature"></i> Tanda Tangan & Tanggal</h2>
                     <div class="signature-container">
                         <div class="signature-box">
                             <label for="tandaTangan">Tanda Tangan Digital</label>
                             <div class="signature-pad">
-                                <input type="text" id="tandaTangan" name="tandaTangan" placeholder="Ketik nama sebagai tanda tangan digital" required="">
+                                <input type="text" id="tandaTangan" name="tandaTangan" placeholder="Ketik nama sebagai tanda tangan digital" required>
                                 <span class="signature-text">Nama Lengkap</span>
                             </div>
                         </div>
                         <div class="signature-box">
                             <label for="tanggal">Tanggal Pengisian</label>
-                            <input type="date" id="tanggal" name="tanggal" required="">
+                            <input type="date" id="tanggal" name="tanggal" required>
                         </div>
                     </div>
                 </div>
@@ -632,6 +661,23 @@
             // Set today's date as default
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('tanggal').value = today;
+            
+            // Handle radio button selection for Keikutsertaan TKA
+            const radioItems = document.querySelectorAll('.radio-item');
+            const radioButtons = document.querySelectorAll('input[name="keikutsertaan"]');
+            
+            radioButtons.forEach((radio, index) => {
+                radio.addEventListener('change', function() {
+                    // Update UI for selected radio
+                    radioItems.forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    
+                    if (this.checked) {
+                        radioItems[index].classList.add('selected');
+                    }
+                });
+            });
             
             // Handle subject selection for all enabled checkboxes
             const subjectCheckboxes = document.querySelectorAll('input[name="mataPelajaran"]:not(:disabled)');
@@ -714,6 +760,12 @@
                     // Reset KIK as pre-selected
                     document.getElementById('kik').checked = true;
                     
+                    // Reset radio selection UI
+                    radioItems.forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    radioItems[0].classList.add('selected');
+                    
                     // Reset subject selection UI
                     const allSubjectItems = document.querySelectorAll('.subject-item');
                     allSubjectItems.forEach(item => {
@@ -751,5 +803,5 @@
             }
         });
     </script>
-
-</body></html>
+</body>
+</html>
